@@ -1,6 +1,6 @@
-package com.codecool;
+package com.codecool.platformer;
 
-import com.codecool.main.Game;
+import com.codecool.platformer.main.Game;
 
 public class Platformer {
     public static void main(String[] args) {
