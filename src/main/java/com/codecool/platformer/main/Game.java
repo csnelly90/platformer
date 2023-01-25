@@ -1,4 +1,4 @@
-package com.codecool.main;
+package com.codecool.platformer.main;
 
 public class Game {
 
@@ -8,5 +8,6 @@ public class Game {
     public Game() {
         this.gamePanel= new GamePanel();
         this.gameWindow = new GameWindow(gamePanel);
+        gamePanel.requestFocus();
     }
 }

@@ -1,4 +1,4 @@
-package com.codecool.main;
+package com.codecool.platformer.main;
 
 import javax.swing.*;
 
