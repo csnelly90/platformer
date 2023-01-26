@@ -18,7 +18,7 @@ public class Player extends Entity {
     private PlayerAnimations playerAction = PlayerAnimations.IDLE;
     private Directions playerDirection = Directions.NONE;
     private float playerSpeed = 2.0f;
-    private boolean moving = false;
+    private boolean moving, attacking = false;
     private boolean left, up, right, down;
 
     public Player(float x, float y) {
@@ -52,8 +52,14 @@ public class Player extends Entity {
             animationIndex++;
             if (animationIndex >= playerAction.SPITE_AMOUNT) {
                 animationIndex = 0;
+                attacking = false;
             }
         }
+    }
+
+    private void resetAnimationTick() {
+        animationTick = 0;
+        animationIndex = 0;
     }
 
     private void updatePosition() {
@@ -77,10 +83,21 @@ public class Player extends Entity {
     }
 
     private void setAnimation() {
+        int startAnimation = playerAction.ROW_INDEX;
+
         if (moving) {
             this.playerAction = PlayerAnimations.RUNNING;
         } else {
             this.playerAction = PlayerAnimations.IDLE;
+        }
+
+        if (attacking) {
+            playerAction = PlayerAnimations.ATTACK;
+        }
+
+        // reset animation counters when animation is abrupt by another animation
+        if (startAnimation != playerAction.ROW_INDEX) {
+            resetAnimationTick();
         }
     }
 
@@ -110,6 +127,10 @@ public class Player extends Entity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.attacking = attacking;
     }
 
     public boolean isLeft() {
