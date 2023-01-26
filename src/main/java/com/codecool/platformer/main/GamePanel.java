@@ -82,12 +82,14 @@ public class GamePanel extends JPanel {
         setMaximumSize(size);
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void updateGame() {
         updateAnimationTick();
-
         setAnimation();
         updatePosition();
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         
         // enlarge sprite image to triple size
         g.drawImage(animations[playerAction.ROW_INDEX][animationIndex], (int) xDelta, (int) yDelta, PLAYER_WIDTH * 3, PLAYER_HEIGHT * 3, null);
