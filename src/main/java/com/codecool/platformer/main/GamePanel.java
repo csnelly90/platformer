@@ -35,6 +35,7 @@ public class GamePanel extends JPanel {
         idleAnimation = new BufferedImage[5];
 
         for (int i = 0; i < idleAnimation.length; i++) {
+            // get all sprite images from the first row
             idleAnimation[i] = img.getSubimage(i * PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT);
         }
     }
@@ -67,7 +68,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(1280, 800);
+        Dimension size = new Dimension(ConstantProperties.WINDOW_WIDTH, ConstantProperties.WINDOW_HEIGHT);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);
@@ -76,6 +77,8 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         updateAnimationTick();
+
+        // enlarge sprite image to double size
         g.drawImage(idleAnimation[animationIndex], (int) xDelta, (int) yDelta, PLAYER_WIDTH * 2, PLAYER_HEIGHT * 2, null);
     }
 
