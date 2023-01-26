@@ -1,5 +1,6 @@
 package com.codecool.platformer.main;
 
+import com.codecool.platformer.constants.ConstantProperties;
 import com.codecool.platformer.inputs.KeyboardInputs;
 import com.codecool.platformer.inputs.MouseInputs;
 
@@ -14,15 +15,40 @@ public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs;
     private float xDelta = 100, yDelta = 100;
-    private BufferedImage img, subImg;
+    private final int PLAYER_WIDTH = ConstantProperties.SpriteSize.PLAYER.WIDTH;
+    private final int PLAYER_HEIGHT = ConstantProperties.SpriteSize.PLAYER.HEIGHT;
+    private BufferedImage img;
+    private BufferedImage[] idleAnimation;
+    private int animationTick, animationIndex, animationSpeed = ConstantProperties.FPS_PER_SEC / ConstantProperties.ANIMATION_PER_SEC;
 
     public GamePanel() {
         this.mouseInputs = new MouseInputs(this);
         importImg();
+        loadAnimations();
         setPanelSize();
         addKeyListener(new KeyboardInputs(this));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
+    }
+
+    private void loadAnimations() {
+        idleAnimation = new BufferedImage[5];
+
+        for (int i = 0; i < idleAnimation.length; i++) {
+            idleAnimation[i] = img.getSubimage(i * PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT);
+        }
+    }
+
+    private void updateAnimationTick() {
+        animationTick++;
+
+        if (animationTick >= animationSpeed) {
+            animationTick = 0;
+            animationIndex++;
+            if (animationIndex >= idleAnimation.length) {
+                animationIndex = 0;
+            }
+        }
     }
 
     private void importImg() {
@@ -49,8 +75,8 @@ public class GamePanel extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        subImg = img.getSubimage(1*64, 8*40, 64, 40);
-        g.drawImage(subImg, (int) xDelta, (int) yDelta, 128, 80, null);
+        updateAnimationTick();
+        g.drawImage(idleAnimation[animationIndex], (int) xDelta, (int) yDelta, PLAYER_WIDTH * 2, PLAYER_HEIGHT * 2, null);
     }
 
     public void changeXDelta(int value) {
