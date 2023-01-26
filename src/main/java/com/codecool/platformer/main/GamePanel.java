@@ -32,9 +32,7 @@ public class GamePanel extends JPanel {
 
     private void setPanelSize() {
         Dimension size = new Dimension(GameProperties.WINDOW_WIDTH, GameProperties.WINDOW_HEIGHT);
-        setMinimumSize(size);
         setPreferredSize(size);
-        setMaximumSize(size);
     }
 
     public Game getGame() {
