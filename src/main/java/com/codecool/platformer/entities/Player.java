@@ -27,9 +27,9 @@ public class Player extends Entity {
     }
 
     public void update() {
+        updatePosition();
         updateAnimationTick();
         setAnimation();
-        updatePosition();
     }
 
     public void render(Graphics g) {
@@ -57,14 +57,22 @@ public class Player extends Entity {
     }
 
     private void updatePosition() {
+        moving = false;
+
         if (left && !right) {
             x -= playerSpeed;
+            moving = true;
         } else if (right && !left) {
             x += playerSpeed;
-        } else if (up && !down) {
+            moving = true;
+        }
+
+        if (up && !down) {
             y -= playerSpeed;
+            moving = true;
         } else if (down && !up) {
             y += playerSpeed;
+            moving = true;
         }
     }
 
