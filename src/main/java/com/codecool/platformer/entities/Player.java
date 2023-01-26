@@ -4,12 +4,10 @@ import com.codecool.platformer.constants.Directions;
 import com.codecool.platformer.constants.GameProperties;
 import com.codecool.platformer.constants.PlayerAnimations;
 import com.codecool.platformer.constants.SpriteSize;
+import com.codecool.platformer.utils.LoadSave;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Player extends Entity {
 
@@ -102,29 +100,18 @@ public class Player extends Entity {
     }
 
     private void loadAnimations() {
-        InputStream is = getClass().getResourceAsStream("/sprites/player_sprites.png");
+        BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-        try {
-            BufferedImage img = ImageIO.read(is);
-            this.animations = new BufferedImage[9][6];
+        this.animations = new BufferedImage[9][6];
 
-            for (int i = 0; i < animations.length; i++) {
-                for (int j = 0; j < animations[i].length; j++) {
-                    animations[i][j] = img.getSubimage(
-                            j * SpriteSize.PLAYER.WIDTH,
-                            i * SpriteSize.PLAYER.HEIGHT,
-                            SpriteSize.PLAYER.WIDTH,
-                            SpriteSize.PLAYER.HEIGHT
-                    );
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        for (int i = 0; i < animations.length; i++) {
+            for (int j = 0; j < animations[i].length; j++) {
+                animations[i][j] = img.getSubimage(
+                        j * SpriteSize.PLAYER.WIDTH,
+                        i * SpriteSize.PLAYER.HEIGHT,
+                        SpriteSize.PLAYER.WIDTH,
+                        SpriteSize.PLAYER.HEIGHT
+                );
             }
         }
     }
