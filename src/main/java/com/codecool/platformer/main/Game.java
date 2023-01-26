@@ -6,6 +6,8 @@ public class Game implements Runnable {
     private GamePanel gamePanel;
     private Thread gameThread;
     private final int FPS_SET = 120;
+    private final int ONE_SEC_IN_MILLISECONDS = 1000;
+    private final double ONE_SEC_IN_NANOSECONDS = 1000000000.0;
 
     public Game() {
         this.gamePanel = new GamePanel();
@@ -21,7 +23,7 @@ public class Game implements Runnable {
 
     @Override
     public void run() {
-        double timePerFrame = 1000000000.0 / FPS_SET;
+        double timePerFrame = ONE_SEC_IN_NANOSECONDS / FPS_SET;
         long lastFrame = System.nanoTime();
         long now = System.nanoTime();
         int frames = 0;
@@ -36,7 +38,7 @@ public class Game implements Runnable {
                 frames++;
             }
 
-            if (System.currentTimeMillis() - lastCheck >= 1000) {
+            if (System.currentTimeMillis() - lastCheck >= ONE_SEC_IN_MILLISECONDS) {
                 lastCheck = System.currentTimeMillis();
                 System.out.println("FPS: " + frames);
                 frames = 0;
