@@ -17,8 +17,9 @@ public class Player extends Entity {
     private int animationTick, animationIndex, animationSpeed = GameProperties.FPS_PER_SEC / GameProperties.ANIMATION_PER_SEC;
     private PlayerAnimations playerAction = PlayerAnimations.IDLE;
     private Directions playerDirection = Directions.NONE;
+    private float playerSpeed = 2.0f;
     private boolean moving = false;
-    private final int STEP_SIZE = 5;
+    private boolean left, up, right, down;
 
     public Player(float x, float y) {
         super(x, y);
@@ -56,21 +57,14 @@ public class Player extends Entity {
     }
 
     private void updatePosition() {
-        if (moving) {
-            switch (playerDirection) {
-                case LEFT:
-                    x -= STEP_SIZE;
-                    break;
-                case UP:
-                    y -= STEP_SIZE;
-                    break;
-                case RIGHT:
-                    x += STEP_SIZE;
-                    break;
-                case DOWN:
-                    y += STEP_SIZE;
-                    break;
-            }
+        if (left && !right) {
+            x -= playerSpeed;
+        } else if (right && !left) {
+            x += playerSpeed;
+        } else if (up && !down) {
+            y -= playerSpeed;
+        } else if (down && !up) {
+            y += playerSpeed;
         }
     }
 
@@ -80,15 +74,6 @@ public class Player extends Entity {
         } else {
             this.playerAction = PlayerAnimations.IDLE;
         }
-    }
-
-    public void setDirection(Directions direction) {
-        this.playerDirection = direction;
-        this.moving = true;
-    }
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
     }
 
     private void loadAnimations() {
@@ -117,5 +102,37 @@ public class Player extends Entity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
     }
 }
