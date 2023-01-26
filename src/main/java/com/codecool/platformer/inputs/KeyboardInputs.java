@@ -1,5 +1,6 @@
 package com.codecool.platformer.inputs;
 
+import com.codecool.platformer.constants.Directions;
 import com.codecool.platformer.main.GamePanel;
 
 import java.awt.event.KeyEvent;
@@ -7,8 +8,7 @@ import java.awt.event.KeyListener;
 
 public class KeyboardInputs implements KeyListener {
 
-    private GamePanel gamePanel;
-    private final int STEP_SIZE = 5;
+    private final GamePanel gamePanel;
 
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -23,22 +23,29 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gamePanel.changeYDelta(-STEP_SIZE);
+                gamePanel.setDirection(Directions.UP);
                 break;
             case KeyEvent.VK_A:
-                gamePanel.changeXDelta(-STEP_SIZE);
+                gamePanel.setDirection(Directions.LEFT);
                 break;
             case KeyEvent.VK_S:
-                gamePanel.changeYDelta(STEP_SIZE);
+                gamePanel.setDirection(Directions.DOWN);
                 break;
             case KeyEvent.VK_D:
-                gamePanel.changeXDelta(STEP_SIZE);
+                gamePanel.setDirection(Directions.RIGHT);
                 break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_D:
+                gamePanel.setMoving(false);
+                break;
+        }
     }
 }

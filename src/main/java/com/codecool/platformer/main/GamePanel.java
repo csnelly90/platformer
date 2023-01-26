@@ -1,6 +1,9 @@
 package com.codecool.platformer.main;
 
-import com.codecool.platformer.constants.ConstantProperties;
+import com.codecool.platformer.constants.Directions;
+import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.PlayerAnimations;
+import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.inputs.KeyboardInputs;
 import com.codecool.platformer.inputs.MouseInputs;
 
@@ -15,11 +18,15 @@ public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs;
     private float xDelta = 100, yDelta = 100;
-    private final int PLAYER_WIDTH = ConstantProperties.SpriteSize.PLAYER.WIDTH;
-    private final int PLAYER_HEIGHT = ConstantProperties.SpriteSize.PLAYER.HEIGHT;
+    private final int PLAYER_WIDTH = SpriteSize.PLAYER.WIDTH;
+    private final int PLAYER_HEIGHT = SpriteSize.PLAYER.HEIGHT;
     private BufferedImage img;
-    private BufferedImage[] idleAnimation;
-    private int animationTick, animationIndex, animationSpeed = ConstantProperties.FPS_PER_SEC / ConstantProperties.ANIMATION_PER_SEC;
+    private BufferedImage[][] animations;
+    private int animationTick, animationIndex, animationSpeed = GameProperties.FPS_PER_SEC / GameProperties.ANIMATION_PER_SEC;
+    private PlayerAnimations playerAction = PlayerAnimations.IDLE;
+    private Directions playerDirection = Directions.NONE;
+    private boolean moving = false;
+    private final int STEP_SIZE = 5;
 
     public GamePanel() {
         this.mouseInputs = new MouseInputs(this);
@@ -32,11 +39,12 @@ public class GamePanel extends JPanel {
     }
 
     private void loadAnimations() {
-        idleAnimation = new BufferedImage[5];
+        this.animations = new BufferedImage[9][6];
 
-        for (int i = 0; i < idleAnimation.length; i++) {
-            // get all sprite images from the first row
-            idleAnimation[i] = img.getSubimage(i * PLAYER_WIDTH, 0, PLAYER_WIDTH, PLAYER_HEIGHT);
+        for (int i = 0; i < animations.length; i++) {
+            for (int j = 0; j < animations[i].length; j++) {
+                animations[i][j] = img.getSubimage(j * PLAYER_WIDTH, i * PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT);
+            }
         }
     }
 
@@ -46,7 +54,7 @@ public class GamePanel extends JPanel {
         if (animationTick >= animationSpeed) {
             animationTick = 0;
             animationIndex++;
-            if (animationIndex >= idleAnimation.length) {
+            if (animationIndex >= playerAction.SPITE_AMOUNT) {
                 animationIndex = 0;
             }
         }
@@ -68,7 +76,7 @@ public class GamePanel extends JPanel {
     }
 
     private void setPanelSize() {
-        Dimension size = new Dimension(ConstantProperties.WINDOW_WIDTH, ConstantProperties.WINDOW_HEIGHT);
+        Dimension size = new Dimension(GameProperties.WINDOW_WIDTH, GameProperties.WINDOW_HEIGHT);
         setMinimumSize(size);
         setPreferredSize(size);
         setMaximumSize(size);
@@ -78,23 +86,46 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         updateAnimationTick();
 
-        // enlarge sprite image to double size
-        g.drawImage(idleAnimation[animationIndex], (int) xDelta, (int) yDelta, PLAYER_WIDTH * 2, PLAYER_HEIGHT * 2, null);
+        setAnimation();
+        updatePosition();
+        
+        // enlarge sprite image to triple size
+        g.drawImage(animations[playerAction.ROW_INDEX][animationIndex], (int) xDelta, (int) yDelta, PLAYER_WIDTH * 3, PLAYER_HEIGHT * 3, null);
     }
 
-    public void changeXDelta(int value) {
-        xDelta += value;
-        repaint();
+    private void updatePosition() {
+        if (moving) {
+            switch (playerDirection) {
+                case LEFT:
+                    xDelta -= STEP_SIZE;
+                    break;
+                case UP:
+                    yDelta -= STEP_SIZE;
+                    break;
+                case RIGHT:
+                    xDelta += STEP_SIZE;
+                    break;
+                case DOWN:
+                    yDelta += STEP_SIZE;
+                    break;
+            }
+        }
     }
 
-    public void changeYDelta(int value) {
-        yDelta += value;
-        repaint();
+    private void setAnimation() {
+        if (moving) {
+            this.playerAction = PlayerAnimations.RUNNING;
+        } else {
+            this.playerAction = PlayerAnimations.IDLE;
+        }
     }
 
-    public void setRectPos(int x, int y) {
-        this.xDelta = x;
-        this.yDelta = y;
-        repaint();
+    public void setDirection(Directions direction) {
+        this.playerDirection = direction;
+        this.moving = true;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 }
