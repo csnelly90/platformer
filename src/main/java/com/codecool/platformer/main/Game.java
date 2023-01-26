@@ -1,6 +1,9 @@
 package com.codecool.platformer.main;
 
 import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.entities.Player;
+
+import java.awt.*;
 
 public class Game implements Runnable {
 
@@ -9,13 +12,19 @@ public class Game implements Runnable {
     private Thread gameThread;
     private final int ONE_SEC_IN_MILLISECONDS = 1000;
     private final double ONE_SEC_IN_NANOSECONDS = 1000000000.0;
+    private Player player;
 
 
     public Game() {
-        this.gamePanel = new GamePanel();
+        initClasses();
+        this.gamePanel = new GamePanel(this);
         this.gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
         startGameLoop();
+    }
+
+    private void initClasses() {
+        player = new Player(200, 200);
     }
 
     private void startGameLoop() {
@@ -24,7 +33,11 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        gamePanel.updateGame();
+        player.update();
+    }
+
+    public void render(Graphics g) {
+        player.render(g);
     }
 
     @Override
@@ -68,5 +81,13 @@ public class Game implements Runnable {
                 updates = 0;
             }
         }
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void windowFocusLost() {
+        player.resetDirectionBooleans();
     }
 }
