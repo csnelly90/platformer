@@ -19,8 +19,8 @@ public class Player extends Entity {
     private boolean moving, attacking = false;
     private boolean left, up, right, down;
 
-    public Player(float x, float y) {
-        super(x, y);
+    public Player(float x, float y, int width, int height) {
+        super(x, y, width, height);
         loadAnimations();
     }
 
@@ -36,8 +36,8 @@ public class Player extends Entity {
                 animations[playerAction.ROW_INDEX][animationIndex],
                 (int) x,
                 (int) y,
-                SpriteSize.PLAYER.WIDTH * 3,
-                SpriteSize.PLAYER.HEIGHT * 3,
+                width,
+                height,
                 null
         );
     }

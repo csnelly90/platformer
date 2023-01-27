@@ -1,7 +1,9 @@
 package com.codecool.platformer.main;
 
 import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.entities.Player;
+import com.codecool.platformer.levels.LevelManager;
 
 import java.awt.*;
 
@@ -13,6 +15,7 @@ public class Game implements Runnable {
     private final int ONE_SEC_IN_MILLISECONDS = 1000;
     private final double ONE_SEC_IN_NANOSECONDS = 1000000000.0;
     private Player player;
+    private LevelManager levelManager;
 
 
     public Game() {
@@ -24,7 +27,8 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        player = new Player(200, 200);
+        player = new Player(200, 200, (int) (SpriteSize.PLAYER.WIDTH * GameProperties.SCALE), (int) (SpriteSize.PLAYER.HEIGHT * GameProperties.SCALE));
+        levelManager = new LevelManager(this);
     }
 
     private void startGameLoop() {
@@ -34,9 +38,11 @@ public class Game implements Runnable {
 
     private void update() {
         player.update();
+        levelManager.update();
     }
 
     public void render(Graphics g) {
+        levelManager.draw(g);
         player.render(g);
     }
 
