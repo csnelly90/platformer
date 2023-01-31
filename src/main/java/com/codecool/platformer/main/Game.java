@@ -27,8 +27,9 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        player = new Player(200, 200, (int) (SpriteSize.PLAYER.WIDTH * GameProperties.SCALE), (int) (SpriteSize.PLAYER.HEIGHT * GameProperties.SCALE));
         levelManager = new LevelManager(this);
+        player = new Player(200, 200, (int) (SpriteSize.PLAYER.WIDTH * GameProperties.SCALE), (int) (SpriteSize.PLAYER.HEIGHT * GameProperties.SCALE));
+        player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
     }
 
     private void startGameLoop() {
