@@ -18,10 +18,17 @@ public class Player extends Entity {
     private Directions playerDirection = Directions.NONE;
     private float playerSpeed = 2.0f;
     private boolean moving, attacking = false;
-    private boolean left, up, right, down;
+    private boolean left, up, right, down, jump;
     private int[][] levelData;
     private float xDrawOffset = 21 * GameProperties.SCALE; // pixel difference between hitbox and player sprite size on x-axis
     private float yDrawOffset = 4 * GameProperties.SCALE; // pixel difference between hitbox and player sprite size on y-axis
+
+    // Jumping, falling, gravity
+    private float airSpeed = 0f;
+    private float gravity = 0.04f * GameProperties.SCALE;
+    private float jumpSpeed = -2.25f * GameProperties.SCALE;
+    private float fallSpeedAfterCollision = 0.5f * GameProperties.SCALE;
+    private boolean inAir = false;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
