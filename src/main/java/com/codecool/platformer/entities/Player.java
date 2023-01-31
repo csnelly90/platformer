@@ -4,6 +4,7 @@ import com.codecool.platformer.constants.Directions;
 import com.codecool.platformer.constants.GameProperties;
 import com.codecool.platformer.constants.PlayerAnimations;
 import com.codecool.platformer.constants.SpriteSize;
+import com.codecool.platformer.utils.HelpMethods;
 import com.codecool.platformer.utils.LoadSave;
 
 import java.awt.*;
@@ -18,6 +19,7 @@ public class Player extends Entity {
     private float playerSpeed = 2.0f;
     private boolean moving, attacking = false;
     private boolean left, up, right, down;
+    private int[][] levelData;
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -65,19 +67,26 @@ public class Player extends Entity {
     private void updatePosition() {
         moving = false;
 
+        if (!left && !right && !up && !down) return;
+
+        // temporary storage of x and y
+        float xSpeed = 0, ySpeed = 0;
+
         if (left && !right) {
-            x -= playerSpeed;
-            moving = true;
+            xSpeed -= playerSpeed;
         } else if (right && !left) {
-            x += playerSpeed;
-            moving = true;
+            xSpeed += playerSpeed;
         }
 
         if (up && !down) {
-            y -= playerSpeed;
-            moving = true;
+            ySpeed -= playerSpeed;
         } else if (down && !up) {
-            y += playerSpeed;
+            ySpeed += playerSpeed;
+        }
+
+        if (HelpMethods.canMoveHere(x + xSpeed, y + ySpeed, width, height, levelData)) {
+            this.x += xSpeed;
+            this.y += ySpeed;
             moving = true;
         }
     }
@@ -116,6 +125,10 @@ public class Player extends Entity {
                 );
             }
         }
+    }
+
+    public void loadLevelData(int[][] levelData) {
+        this.levelData = levelData;
     }
 
     public void setAttacking(boolean attacking) {
