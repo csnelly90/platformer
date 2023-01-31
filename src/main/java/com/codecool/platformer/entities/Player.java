@@ -20,15 +20,22 @@ public class Player extends Entity {
     private boolean moving, attacking = false;
     private boolean left, up, right, down;
     private int[][] levelData;
+    private float xDrawOffset = 21 * GameProperties.SCALE; // pixel difference between hitbox and player sprite size on x-axis
+    private float yDrawOffset = 4 * GameProperties.SCALE; // pixel difference between hitbox and player sprite size on y-axis
 
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
+        initHitbox(
+                x,
+                y,
+                SpriteSize.PLAYER.HITBOX_WIDTH * GameProperties.SCALE,
+                SpriteSize.PLAYER.HITBOX_HEIGHT * GameProperties.SCALE
+        );
     }
 
     public void update() {
         updatePosition();
-        updateHitbox();
         updateAnimationTick();
         setAnimation();
     }
@@ -37,8 +44,8 @@ public class Player extends Entity {
         // enlarge sprite image to triple size
         g.drawImage(
                 animations[playerAction.ROW_INDEX][animationIndex],
-                (int) x,
-                (int) y,
+                (int) (hitbox.x - xDrawOffset),
+                (int) (hitbox.y - yDrawOffset),
                 width,
                 height,
                 null
@@ -84,9 +91,9 @@ public class Player extends Entity {
             ySpeed += playerSpeed;
         }
 
-        if (HelpMethods.canMoveHere(x + xSpeed, y + ySpeed, width, height, levelData)) {
-            this.x += xSpeed;
-            this.y += ySpeed;
+        if (HelpMethods.canMoveHere(hitbox.x + xSpeed, hitbox.y + ySpeed, hitbox.width, hitbox.height, levelData)) {
+            hitbox.x += xSpeed;
+            hitbox.y += ySpeed;
             moving = true;
         }
     }
