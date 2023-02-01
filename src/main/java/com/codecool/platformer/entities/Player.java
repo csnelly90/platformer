@@ -81,27 +81,61 @@ public class Player extends Entity {
     private void updatePosition() {
         moving = false;
 
-        if (!left && !right && !up && !down) return;
+        if (jump) {
+            jump();
+        }
 
-        // temporary storage of x and y
-        float xSpeed = 0, ySpeed = 0;
+        if (!left && !right && !inAir) return;
 
-        if (left && !right) {
+        // temporary storage of x
+        float xSpeed = 0;
+
+        if (left) {
             xSpeed -= playerSpeed;
-        } else if (right && !left) {
+        }
+
+        if (right) {
             xSpeed += playerSpeed;
         }
 
-        if (up && !down) {
-            ySpeed -= playerSpeed;
-        } else if (down && !up) {
-            ySpeed += playerSpeed;
+        if (inAir) {
+            if (HelpMethods.canMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, levelData)) {
+                hitbox.y += airSpeed;
+                airSpeed += gravity;
+                updateXPosition(xSpeed);
+            } else {
+                hitbox.y = HelpMethods.getEntityYPositionUnderRoofOrAboveFloor(hitbox, airSpeed);
+                if (airSpeed > 0) {
+                    resetInAir();
+                } else {
+                    airSpeed = fallSpeedAfterCollision;
+                    updateXPosition(xSpeed);
+                }
+            }
+        } else {
+            updateXPosition(xSpeed);
         }
 
-        if (HelpMethods.canMoveHere(hitbox.x + xSpeed, hitbox.y + ySpeed, hitbox.width, hitbox.height, levelData)) {
+        moving = true;
+    }
+
+    private void jump() {
+        if (inAir) return; // if already jumping
+
+        inAir = true;
+        airSpeed = jumpSpeed;
+    }
+
+    private void resetInAir() {
+        inAir = false;
+        airSpeed = 0;
+    }
+
+    private void updateXPosition(float xSpeed) {
+        if (HelpMethods.canMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, levelData)) {
             hitbox.x += xSpeed;
-            hitbox.y += ySpeed;
-            moving = true;
+        } else {
+            hitbox.x = HelpMethods.getEntityXPositionNextToWall(hitbox, xSpeed);
         }
     }
 
