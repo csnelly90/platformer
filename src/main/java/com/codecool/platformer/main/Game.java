@@ -1,6 +1,7 @@
 package com.codecool.platformer.main;
 
 import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.Gamestate;
 import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.entities.Player;
 import com.codecool.platformer.levels.LevelManager;
@@ -38,13 +39,31 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        player.update();
-        levelManager.update();
+        switch (Gamestate.state) {
+            case MENU:
+                // menu.update();
+                break;
+            case PLAYING:
+                player.update();
+                levelManager.update();
+                break;
+            default:
+                break;
+        }
     }
 
     public void render(Graphics g) {
-        levelManager.draw(g);
-        player.render(g);
+        switch (Gamestate.state) {
+            case MENU:
+                // menu.render(g);
+                break;
+            case PLAYING:
+                levelManager.draw(g);
+                player.render(g);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
