@@ -154,6 +154,16 @@ public class Player extends Entity {
             this.playerAction = PlayerAnimations.IDLE;
         }
 
+        if (inAir) {
+            if (airSpeed < 0) { // going upwards
+                this.playerAction = PlayerAnimations.JUMP;
+            } else {
+                this.playerAction = PlayerAnimations.FALLING;
+            }
+        } else {
+
+        }
+
         if (attacking) {
             playerAction = PlayerAnimations.ATTACK;
         }
