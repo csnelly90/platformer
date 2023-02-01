@@ -25,10 +25,6 @@ public class Playing extends State implements StateMethods {
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
     }
 
-    public void windowFocusLost() {
-        player.resetDirectionBooleans();
-    }
-
     @Override
     public void update() {
         levelManager.update();
@@ -91,5 +87,9 @@ public class Playing extends State implements StateMethods {
                 player.setJump(false);
                 break;
         }
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
