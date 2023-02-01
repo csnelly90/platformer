@@ -1,6 +1,7 @@
 package com.codecool.platformer.gamestates;
 
 import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.Gamestate;
 import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.entities.Player;
 import com.codecool.platformer.levels.LevelManager;
@@ -70,6 +71,9 @@ public class Playing extends State implements StateMethods {
                 break;
             case KeyEvent.VK_SPACE:
                 player.setJump(true);
+                break;
+            case KeyEvent.VK_ESCAPE:
+                Gamestate.state = Gamestate.MENU;
                 break;
         }
     }
