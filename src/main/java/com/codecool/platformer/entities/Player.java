@@ -193,6 +193,11 @@ public class Player extends Entity {
 
     public void loadLevelData(int[][] levelData) {
         this.levelData = levelData;
+
+        // make player instantly fall to ground if in air at level start
+        if (!HelpMethods.isEntityOnFloor(hitbox, levelData)) {
+            inAir = true;
+        }
     }
 
     public void setAttacking(boolean attacking) {
