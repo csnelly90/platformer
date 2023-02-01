@@ -98,6 +98,12 @@ public class Player extends Entity {
             xSpeed += playerSpeed;
         }
 
+        if (!inAir) {
+            if (!HelpMethods.isEntityOnFloor(hitbox, levelData)) {
+                inAir = true;
+            }
+        }
+
         if (inAir) {
             if (HelpMethods.canMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, levelData)) {
                 hitbox.y += airSpeed;
