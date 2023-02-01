@@ -31,12 +31,14 @@ public class Playing extends State implements StateMethods {
 
     @Override
     public void update() {
-
+        levelManager.update();
+        player.update();
     }
 
     @Override
     public void draw(Graphics g) {
-
+        levelManager.draw(g);
+        player.render(g);
     }
 
     @Override
