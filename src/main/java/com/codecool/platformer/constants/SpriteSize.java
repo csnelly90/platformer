@@ -1,7 +1,7 @@
 package com.codecool.platformer.constants;
 
 public enum SpriteSize {
-    PLAYER(64, 40, 20, 28);
+    PLAYER(64, 40, 20, 27);
     public final int WIDTH;
     public final int HEIGHT;
     public final int HITBOX_WIDTH;
