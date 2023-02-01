@@ -106,7 +106,9 @@ public class Game implements Runnable {
     }
 
     public void windowFocusLost() {
-
+        if (Gamestate.state == Gamestate.PLAYING) {
+            playing.getPlayer().resetDirectionBooleans();
+        }
     }
 
     public Menu getMenu() {
