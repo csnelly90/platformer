@@ -1,9 +1,9 @@
 package com.codecool.platformer.main;
 
 import com.codecool.platformer.constants.GameProperties;
-import com.codecool.platformer.constants.SpriteSize;
-import com.codecool.platformer.entities.Player;
-import com.codecool.platformer.levels.LevelManager;
+import com.codecool.platformer.constants.Gamestate;
+import com.codecool.platformer.gamestates.Menu;
+import com.codecool.platformer.gamestates.Playing;
 
 import java.awt.*;
 
@@ -14,22 +14,22 @@ public class Game implements Runnable {
     private Thread gameThread;
     private final int ONE_SEC_IN_MILLISECONDS = 1000;
     private final double ONE_SEC_IN_NANOSECONDS = 1000000000.0;
-    private Player player;
-    private LevelManager levelManager;
-
+    private Menu menu;
+    private Playing playing;
 
     public Game() {
         initClasses();
+
         this.gamePanel = new GamePanel(this);
         this.gameWindow = new GameWindow(gamePanel);
         gamePanel.requestFocus();
+
         startGameLoop();
     }
 
     private void initClasses() {
-        levelManager = new LevelManager(this);
-        player = new Player(200, 200, (int) (SpriteSize.PLAYER.WIDTH * GameProperties.SCALE), (int) (SpriteSize.PLAYER.HEIGHT * GameProperties.SCALE));
-        player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
+        menu = new Menu(this);
+        playing = new Playing(this);
     }
 
     private void startGameLoop() {
@@ -38,13 +38,29 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        player.update();
-        levelManager.update();
+        switch (Gamestate.state) {
+            case MENU:
+                menu.update();
+                break;
+            case PLAYING:
+                playing.update();
+                break;
+            default:
+                break;
+        }
     }
 
     public void render(Graphics g) {
-        levelManager.draw(g);
-        player.render(g);
+        switch (Gamestate.state) {
+            case MENU:
+                menu.draw(g);
+                break;
+            case PLAYING:
+                playing.draw(g);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -90,11 +106,17 @@ public class Game implements Runnable {
         }
     }
 
-    public Player getPlayer() {
-        return player;
+    public void windowFocusLost() {
+        if (Gamestate.state == Gamestate.PLAYING) {
+            playing.getPlayer().resetDirectionBooleans();
+        }
     }
 
-    public void windowFocusLost() {
-        player.resetDirectionBooleans();
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public Playing getPlaying() {
+        return playing;
     }
 }
