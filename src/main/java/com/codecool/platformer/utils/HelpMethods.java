@@ -2,6 +2,8 @@ package com.codecool.platformer.utils;
 
 import com.codecool.platformer.constants.GameProperties;
 
+import java.awt.geom.Rectangle2D;
+
 public class HelpMethods {
 
     public static boolean canMoveHere(float x, float y, float width, float height, int[][] levelData) {
@@ -33,4 +35,39 @@ public class HelpMethods {
         return false;
     }
 
+    public static float getEntityXPositionNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
+        int currentTile = (int) (hitbox.x / GameProperties.TILE_SIZE);
+
+        if (xSpeed > 0) { // wall is to the right
+            int tileXPosition = currentTile * GameProperties.TILE_SIZE;
+            int xOffset = (int) (GameProperties.TILE_SIZE - hitbox.width);
+
+            // place player hitbox right next to wall on the right (-1 to avoid overlapping)
+            return tileXPosition + xOffset - 1;
+        } else { // wall is to the left
+            return currentTile * GameProperties.TILE_SIZE;
+        }
+    }
+
+    public static float getEntityYPositionUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
+        int currentTile = (int) (hitbox.y / GameProperties.TILE_SIZE);
+
+        if (airSpeed > 0) { // falling - touching floor
+            int tileYPosition = currentTile * GameProperties.TILE_SIZE;
+            int yOffset = (int) (GameProperties.TILE_SIZE - hitbox.height);
+            return tileYPosition + yOffset - 1;
+        } else { // jumping - touching roof
+            return currentTile * GameProperties.TILE_SIZE;
+        }
+    }
+
+    public static boolean isEntityOnFloor(Rectangle2D.Float hitbox, int[][] levelData) {
+        // check pixel below bottom left and bottom right (+1 pixel for collision)
+        if (!isSolid(hitbox.x, hitbox.y + hitbox.height + 1, levelData)) {
+            if (!isSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, levelData)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
