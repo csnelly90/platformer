@@ -1,5 +1,7 @@
 package com.codecool.platformer.gamestates;
 
+import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.Gamestate;
 import com.codecool.platformer.main.Game;
 
 import java.awt.*;
@@ -19,7 +21,8 @@ public class Menu extends State implements StateMethods {
 
     @Override
     public void draw(Graphics g) {
-
+        g.setColor(Color.BLACK);
+        g.drawString("MENU", GameProperties.WINDOW_WIDTH / 2, 200);
     }
 
     @Override
@@ -44,7 +47,9 @@ public class Menu extends State implements StateMethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            Gamestate.state = Gamestate.PLAYING;
+        }
     }
 
     @Override
