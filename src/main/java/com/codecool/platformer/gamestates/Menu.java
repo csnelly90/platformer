@@ -1,10 +1,16 @@
 package com.codecool.platformer.gamestates;
 
+import com.codecool.platformer.main.Game;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-public class Menu implements StateMethods {
+public class Menu extends State implements StateMethods {
+
+    public Menu(Game game) {
+        super(game);
+    }
 
     @Override
     public void update() {
