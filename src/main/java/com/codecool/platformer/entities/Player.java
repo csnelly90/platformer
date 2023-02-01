@@ -221,4 +221,8 @@ public class Player extends Entity {
         right = false;
         down = false;
     }
+
+    public void setJump(boolean jump) {
+        this.jump = jump;
+    }
 }
