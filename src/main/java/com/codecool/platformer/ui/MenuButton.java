@@ -28,6 +28,11 @@ public class MenuButton {
         Gamestate.state = state;
     }
 
+    public void resetMouseState() {
+        mouseOver = false;
+        mousePressed = true;
+    }
+
     private void initHitbox() {
         hitbox = new Rectangle(xPosition - xOffsetCenter, yPosition, MB_WIDTH, MB_HEIGHT);
     }
