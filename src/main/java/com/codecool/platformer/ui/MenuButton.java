@@ -30,7 +30,7 @@ public class MenuButton {
 
     public void resetMouseState() {
         mouseOver = false;
-        mousePressed = true;
+        mousePressed = false;
     }
 
     private void initHitbox() {
@@ -85,5 +85,9 @@ public class MenuButton {
 
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
+    }
+
+    public Rectangle getHitbox() {
+        return hitbox;
     }
 }
