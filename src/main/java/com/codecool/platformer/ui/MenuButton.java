@@ -13,6 +13,7 @@ public class MenuButton {
     private Gamestate state;
     private BufferedImage[] images;
     private boolean mouseOver, mousePressed;
+    private Rectangle hitbox;
 
     public MenuButton(int xPosition, int yPosition, int rowIndex, Gamestate state) {
         this.xPosition = xPosition;
@@ -20,6 +21,11 @@ public class MenuButton {
         this.rowIndex = rowIndex;
         this.state = state;
         loadImages();
+        initHitbox();
+    }
+
+    private void initHitbox() {
+        hitbox = new Rectangle(xPosition - xOffsetCenter, yPosition, MB_WIDTH, MB_HEIGHT);
     }
 
     private void loadImages() {
