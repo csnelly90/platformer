@@ -15,4 +15,13 @@ public final class GameProperties {
 
     private GameProperties() {
     }
+
+    public static class UI {
+        public static class Buttons {
+            public static final int MB_DEFAULT_WIDTH = 140;
+            public static final int MB_DEFAULT_HEIGHT = 56;
+            public static final int MB_WIDTH = (int) (MB_DEFAULT_WIDTH * SCALE);
+            public static final int MB_HEIGHT  = (int) (MB_DEFAULT_HEIGHT * SCALE);
+        }
+    }
 }
