@@ -47,10 +47,28 @@ public class MenuButton {
         );
     }
 
+
+
     public void update() {
         imageIndex = 0;
 
         if (mouseOver) imageIndex = 1;
         if (mousePressed) imageIndex = 2;
+    }
+
+    public boolean isMouseOver() {
+        return mouseOver;
+    }
+
+    public void setMouseOver(boolean mouseOver) {
+        this.mouseOver = mouseOver;
+    }
+
+    public boolean isMousePressed() {
+        return mousePressed;
+    }
+
+    public void setMousePressed(boolean mousePressed) {
+        this.mousePressed = mousePressed;
     }
 }
