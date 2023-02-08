@@ -35,5 +35,16 @@ public class MenuButton {
         }
     }
 
+    public void draw(Graphics g) {
+        g.drawImage(
+                images[imageIndex],
+                xPosition - xOffsetCenter,
+                yPosition,
+                MB_WIDTH,
+                MB_HEIGHT,
+                null
+        );
+    }
+
 
 }
