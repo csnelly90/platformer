@@ -12,6 +12,7 @@ public class MenuButton {
     private int xOffsetCenter = MB_WIDTH / 2;
     private Gamestate state;
     private BufferedImage[] images;
+    private boolean mouseOver, mousePressed;
 
     public MenuButton(int xPosition, int yPosition, int rowIndex, Gamestate state) {
         this.xPosition = xPosition;
@@ -46,5 +47,10 @@ public class MenuButton {
         );
     }
 
+    public void update() {
+        imageIndex = 0;
 
+        if (mouseOver) imageIndex = 1;
+        if (mousePressed) imageIndex = 2;
+    }
 }
