@@ -24,6 +24,10 @@ public class MenuButton {
         initHitbox();
     }
 
+    public void applyGamestate() {
+        Gamestate.state = state;
+    }
+
     private void initHitbox() {
         hitbox = new Rectangle(xPosition - xOffsetCenter, yPosition, MB_WIDTH, MB_HEIGHT);
     }
