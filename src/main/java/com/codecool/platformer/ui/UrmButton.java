@@ -11,7 +11,7 @@ public class UrmButton extends PauseButton implements Button {
     private BufferedImage[] images;
     private boolean mouseOver, mousePressed;
     private boolean muted;
-    private int rowIndex;
+    private int rowIndex, imageIndex;
 
     public UrmButton(int x, int y, int width, int height, int rowIndex) {
         super(x, y, width, height);
@@ -40,7 +40,14 @@ public class UrmButton extends PauseButton implements Button {
 
     @Override
     public void draw(Graphics g) {
-
+        g.drawImage(
+                images[imageIndex],
+                x,
+                y,
+                URM_BUTTON_SIZE,
+                URM_BUTTON_SIZE,
+                null
+        );
     }
 
     @Override
