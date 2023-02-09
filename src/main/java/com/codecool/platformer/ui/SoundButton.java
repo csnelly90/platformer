@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 import static com.codecool.platformer.constants.GameProperties.UI.PauseButtons.*;
 
-public class SoundButton extends PauseButton {
+public class SoundButton extends PauseButton implements Button {
     private BufferedImage[][] soundImages;
     private boolean mouseOver, mousePressed;
     private boolean muted;
@@ -34,6 +34,7 @@ public class SoundButton extends PauseButton {
         }
     }
 
+    @Override
     public void update() {
         // gets the first or second row of button sprites in the image
         if (muted) {
@@ -54,6 +55,7 @@ public class SoundButton extends PauseButton {
         }
     }
 
+    @Override
     public void draw(Graphics g) {
         g.drawImage(
                 soundImages[rowIndex][colIndex],
@@ -65,6 +67,7 @@ public class SoundButton extends PauseButton {
         );
     }
 
+    @Override
     public void resetMouseState() {
         mouseOver = false;
         mousePressed = false;
