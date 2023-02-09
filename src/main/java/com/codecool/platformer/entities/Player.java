@@ -36,8 +36,8 @@ public class Player extends Entity {
         initHitbox(
                 x,
                 y,
-                SpriteSize.PLAYER.HITBOX_WIDTH * GameProperties.SCALE,
-                SpriteSize.PLAYER.HITBOX_HEIGHT * GameProperties.SCALE
+                (int) (SpriteSize.PLAYER.HITBOX_WIDTH * GameProperties.SCALE),
+                (int) (SpriteSize.PLAYER.HITBOX_HEIGHT * GameProperties.SCALE)
         );
     }
 
