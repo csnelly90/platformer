@@ -37,7 +37,8 @@ public class PauseOverlay {
     }
 
     public void update() {
-
+        musicButton.update();
+        sfxButton.update();
     }
 
     public void draw(Graphics g) {
