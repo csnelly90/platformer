@@ -27,6 +27,9 @@ public final class GameProperties {
         public static class PauseButtons {
             public static final int SOUND_BUTTON_DEFAULT_SIZE = 42;
             public static final int SOUND_BUTTON_SIZE = (int) (SOUND_BUTTON_DEFAULT_SIZE * SCALE);
+            public static final int URM_BUTTON_DEFAULT_SIZE = 56;
+            public static final int URM_BUTTON_SIZE = (int) (URM_BUTTON_DEFAULT_SIZE * SCALE);
+
         }
     }
 }
