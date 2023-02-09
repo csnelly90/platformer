@@ -6,6 +6,7 @@ import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.entities.Player;
 import com.codecool.platformer.levels.LevelManager;
 import com.codecool.platformer.main.Game;
+import com.codecool.platformer.ui.PauseOverlay;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -14,6 +15,7 @@ import java.awt.event.MouseEvent;
 public class Playing extends State implements StateMethods {
     private Player player;
     private LevelManager levelManager;
+    private PauseOverlay pauseOverlay;
     private boolean paused;
 
     public Playing(Game game) {
@@ -25,6 +27,7 @@ public class Playing extends State implements StateMethods {
         levelManager = new LevelManager(game);
         player = new Player(100 * GameProperties.SCALE, 100 * GameProperties.SCALE, (int) (SpriteSize.PLAYER.WIDTH * GameProperties.SCALE), (int) (SpriteSize.PLAYER.HEIGHT * GameProperties.SCALE));
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
+        pauseOverlay = new PauseOverlay();
     }
 
     @Override
@@ -37,6 +40,7 @@ public class Playing extends State implements StateMethods {
     public void draw(Graphics g) {
         levelManager.draw(g);
         player.render(g);
+        pauseOverlay.draw(g);
     }
 
     @Override
