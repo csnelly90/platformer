@@ -10,7 +10,6 @@ import static com.codecool.platformer.constants.GameProperties.UI.PauseButtons.*
 public class UrmButton extends PauseButton implements Button {
     private BufferedImage[] images;
     private boolean mouseOver, mousePressed;
-    private boolean muted;
     private int rowIndex, imageIndex;
 
     public UrmButton(int x, int y, int width, int height, int rowIndex) {
@@ -57,5 +56,21 @@ public class UrmButton extends PauseButton implements Button {
         imageIndex = 0;
         if (mouseOver) imageIndex = 1;
         if (mousePressed) imageIndex = 2;
+    }
+
+    public boolean isMouseOver() {
+        return mouseOver;
+    }
+
+    public void setMouseOver(boolean mouseOver) {
+        this.mouseOver = mouseOver;
+    }
+
+    public boolean isMousePressed() {
+        return mousePressed;
+    }
+
+    public void setMousePressed(boolean mousePressed) {
+        this.mousePressed = mousePressed;
     }
 }
