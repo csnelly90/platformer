@@ -2,9 +2,6 @@ package com.codecool.platformer.ui;
 
 import java.awt.*;
 
-import static com.codecool.platformer.constants.GameProperties.UI.Buttons.MB_HEIGHT;
-import static com.codecool.platformer.constants.GameProperties.UI.Buttons.MB_WIDTH;
-
 public class PauseButton {
     protected int x, y, width, height;
     protected Rectangle hitbox;
