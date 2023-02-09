@@ -14,6 +14,7 @@ public class LoadSave {
     public static final String FIRST_LEVEL_ATLAS = "/tiles/rock_grass_terrain.png";
     public static final String LEVEL_ONE_DATA = "/tiles/level_one_data.png";
     public static final String MENU_BUTTONS = "/gui/menu_buttons.png";
+    public static final String MENU_BACKGROUND = "/gui/menu_background.png";
 
     public static BufferedImage getSpriteAtlas(String fileName) {
         BufferedImage img = null;
