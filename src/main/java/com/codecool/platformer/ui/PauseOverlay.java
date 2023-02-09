@@ -13,10 +13,24 @@ public class PauseOverlay {
     private BufferedImage background;
     private int menuX, menuY, menuWidth, menuHeight;
     private SoundButton musicButton, sfxButton;
+    private UrmButton menuButton, replayButton, unpauseButton;
 
     public PauseOverlay() {
         loadBackground();
         loadSoundButtons();
+        loadUrmButtons();
+    }
+
+    private void loadUrmButtons() {
+        int menuX = (int) (313 * GameProperties.SCALE);
+        int replayX = (int) (387 * GameProperties.SCALE);
+        int unpauseX = (int) (462 * GameProperties.SCALE);
+        int urmButtonY = (int) (325 * GameProperties.SCALE);
+
+        menuButton = new UrmButton(menuX, urmButtonY, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 2);
+        replayButton = new UrmButton(replayX, urmButtonY, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 1);
+        unpauseButton = new UrmButton(replayX, unpauseX, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 0);
+
     }
 
     private void loadSoundButtons() {
