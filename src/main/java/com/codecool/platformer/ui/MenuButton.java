@@ -7,7 +7,7 @@ import com.codecool.platformer.utils.LoadSave;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MenuButton {
+public class MenuButton implements Button {
     private int xPosition, yPosition, rowIndex, imageIndex;
     private int xOffsetCenter = MB_WIDTH / 2;
     private Gamestate state;
@@ -28,6 +28,7 @@ public class MenuButton {
         Gamestate.state = state;
     }
 
+    @Override
     public void resetMouseState() {
         mouseOver = false;
         mousePressed = false;
@@ -51,6 +52,7 @@ public class MenuButton {
         }
     }
 
+    @Override
     public void draw(Graphics g) {
         g.drawImage(
                 images[imageIndex],
@@ -62,8 +64,7 @@ public class MenuButton {
         );
     }
 
-
-
+    @Override
     public void update() {
         imageIndex = 0;
 
