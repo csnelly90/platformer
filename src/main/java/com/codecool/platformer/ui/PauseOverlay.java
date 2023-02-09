@@ -1,6 +1,7 @@
 package com.codecool.platformer.ui;
 
 import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.Gamestate;
 import com.codecool.platformer.utils.LoadSave;
 
 import java.awt.*;
@@ -102,9 +103,20 @@ public class PauseOverlay {
             if (musicButton.isMousePressed()) musicButton.setMuted(!musicButton.isMuted());
         } else if (isInsideButton(e, sfxButton)) {
             if (sfxButton.isMousePressed()) sfxButton.setMuted(!sfxButton.isMuted());
+        } else if (isInsideButton(e, menuButton)) {
+            if (menuButton.isMousePressed()) Gamestate.state = Gamestate.MENU;
+        } else if (isInsideButton(e, replayButton)) {
+            if (replayButton.isMousePressed()) System.out.println("Replay level to be implemented...");
+        } else if (isInsideButton(e, unpauseButton)) {
+            if (unpauseButton.isMousePressed()) sfxButton.setMuted(!sfxButton.isMuted());
         }
+
+        // reset mouse states for all buttons
         musicButton.resetMouseState();
         sfxButton.resetMouseState();
+        menuButton.resetMouseState();
+        replayButton.resetMouseState();
+        unpauseButton.resetMouseState();
     }
 
     public void mouseMoved(MouseEvent e) {
