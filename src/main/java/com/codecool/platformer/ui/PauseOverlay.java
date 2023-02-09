@@ -49,6 +49,10 @@ public class PauseOverlay {
         sfxButton.draw(g);
     }
 
+    private boolean isInsideButton(MouseEvent e, PauseButton pb) {
+        return pb.getHitbox().contains(e.getX(), e.getY());
+    }
+
     public void mouseDragged(MouseEvent e) {
 
     }
