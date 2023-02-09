@@ -23,5 +23,10 @@ public final class GameProperties {
             public static final int MB_WIDTH = (int) (MB_DEFAULT_WIDTH * SCALE);
             public static final int MB_HEIGHT  = (int) (MB_DEFAULT_HEIGHT * SCALE);
         }
+
+        public static class PauseButtons {
+            public static final int SOUND_BUTTON_DEFAULT_SIZE = 42;
+            public static final int SOUND_BUTTON_SIZE = (int) (SOUND_BUTTON_DEFAULT_SIZE * SCALE);
+        }
     }
 }
