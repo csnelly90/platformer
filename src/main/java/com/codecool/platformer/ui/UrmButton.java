@@ -52,6 +52,9 @@ public class UrmButton extends PauseButton implements Button {
 
     @Override
     public void update() {
-
+        // gets the proper button image from row based on mouse event
+        imageIndex = 0;
+        if (mouseOver) imageIndex = 1;
+        if (mousePressed) imageIndex = 2;
     }
 }
