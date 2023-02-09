@@ -58,7 +58,11 @@ public class PauseOverlay {
     }
 
     public void mousePressed(MouseEvent e) {
-
+        if (isInsideButton(e, musicButton)) {
+            musicButton.setMousePressed(true);
+        } else if (isInsideButton(e, sfxButton)) {
+            sfxButton.setMousePressed(true);
+        }
     }
 
     public void mouseReleased(MouseEvent e) {
