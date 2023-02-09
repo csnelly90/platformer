@@ -16,7 +16,7 @@ public class Player extends Entity {
     private int animationTick, animationIndex, animationSpeed = GameProperties.FPS_PER_SEC / GameProperties.ANIMATION_PER_SEC;
     private PlayerAnimations playerAction = PlayerAnimations.IDLE;
     private Directions playerDirection = Directions.NONE;
-    private float playerSpeed = 2.0f;
+    private float playerSpeed = 1.0f * GameProperties.SCALE;
     private boolean moving, attacking = false;
     private boolean left, up, right, down, jump;
     private int[][] levelData;
@@ -36,8 +36,8 @@ public class Player extends Entity {
         initHitbox(
                 x,
                 y,
-                SpriteSize.PLAYER.HITBOX_WIDTH * GameProperties.SCALE,
-                SpriteSize.PLAYER.HITBOX_HEIGHT * GameProperties.SCALE
+                (int) (SpriteSize.PLAYER.HITBOX_WIDTH * GameProperties.SCALE),
+                (int) (SpriteSize.PLAYER.HITBOX_HEIGHT * GameProperties.SCALE)
         );
     }
 
