@@ -35,7 +35,8 @@ public class UrmButton extends PauseButton implements Button {
 
     @Override
     public void resetMouseState() {
-
+        mouseOver = false;
+        mousePressed = false;
     }
 
     @Override
