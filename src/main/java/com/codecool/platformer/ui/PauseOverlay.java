@@ -22,14 +22,14 @@ public class PauseOverlay {
     }
 
     private void loadUrmButtons() {
-        int menuX = (int) (313 * GameProperties.SCALE);
-        int replayX = (int) (387 * GameProperties.SCALE);
-        int unpauseX = (int) (462 * GameProperties.SCALE);
-        int urmButtonY = (int) (325 * GameProperties.SCALE);
+        int menuX = (int) (316 * GameProperties.SCALE);
+        int replayX = (int) (388 * GameProperties.SCALE);
+        int unpauseX = (int) (460 * GameProperties.SCALE);
+        int urmButtonY = (int) (330 * GameProperties.SCALE);
 
         menuButton = new UrmButton(menuX, urmButtonY, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 2);
         replayButton = new UrmButton(replayX, urmButtonY, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 1);
-        unpauseButton = new UrmButton(replayX, unpauseX, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 0);
+        unpauseButton = new UrmButton(unpauseX, urmButtonY, URM_BUTTON_SIZE, URM_BUTTON_SIZE, 0);
 
     }
 
@@ -51,8 +51,14 @@ public class PauseOverlay {
     }
 
     public void update() {
+        // sound buttons
         musicButton.update();
         sfxButton.update();
+
+        // urm buttons
+        menuButton.update();
+        replayButton.update();
+        unpauseButton.update();
     }
 
     public void draw(Graphics g) {
@@ -62,6 +68,11 @@ public class PauseOverlay {
         // sound buttons
         musicButton.draw(g);
         sfxButton.draw(g);
+
+        // urm buttons
+        menuButton.draw(g);
+        replayButton.draw(g);
+        unpauseButton.draw(g);
     }
 
     private boolean isInsideButton(MouseEvent e, PauseButton pb) {
