@@ -30,7 +30,7 @@ public final class GameProperties {
             public static final int URM_BUTTON_DEFAULT_SIZE = 56;
             public static final int URM_BUTTON_SIZE = (int) (URM_BUTTON_DEFAULT_SIZE * SCALE);
             public static final int VOL_BUTTON_DEFAULT_WIDTH = 28;
-            public static final int VOL_BUTTON_DEFAULT_HEIGHT = 45;
+            public static final int VOL_BUTTON_DEFAULT_HEIGHT = 44;
             public static final int VOL_SLIDER_DEFAULT_WIDTH = 215;
             public static final int VOL_BUTTON_WIDTH = (int) (VOL_BUTTON_DEFAULT_WIDTH * SCALE);
             public static final int VOL_BUTTON_HEIGHT = (int) (VOL_BUTTON_DEFAULT_HEIGHT * SCALE);
