@@ -16,7 +16,7 @@ public class Playing extends State implements StateMethods {
     private Player player;
     private LevelManager levelManager;
     private PauseOverlay pauseOverlay;
-    private boolean paused = true;
+    private boolean paused = false;
 
     public Playing(Game game) {
         super(game);
@@ -92,7 +92,7 @@ public class Playing extends State implements StateMethods {
                 player.setJump(true);
                 break;
             case KeyEvent.VK_ESCAPE:
-                Gamestate.state = Gamestate.MENU;
+                paused = !paused;
                 break;
         }
     }
