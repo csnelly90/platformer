@@ -107,7 +107,10 @@ public class PauseOverlay {
         } else if (isInsideButton(e, sfxButton)) {
             if (sfxButton.isMousePressed()) sfxButton.setMuted(!sfxButton.isMuted());
         } else if (isInsideButton(e, menuButton)) {
-            if (menuButton.isMousePressed()) Gamestate.state = Gamestate.MENU;
+            if (menuButton.isMousePressed()) {
+                Gamestate.state = Gamestate.MENU;
+                playing.unpauseGame();
+            }
         } else if (isInsideButton(e, replayButton)) {
             if (replayButton.isMousePressed()) System.out.println("Replay level to be implemented...");
         } else if (isInsideButton(e, unpauseButton)) {
