@@ -11,13 +11,15 @@ public class VolumeButton extends PauseButton implements Button {
     private BufferedImage slider;
     private boolean mouseOver, mousePressed;
     private int imageIndex;
-    private int sliderButtonX;
+    private int sliderButtonX, minSliderX, maxSliderX;
 
     public VolumeButton(int x, int y, int width, int height) {
         super(x + width / 2, y, VOL_BUTTON_WIDTH, height);
         sliderButtonX = x + width / 2;
         this.x = x;
         this.width = width;
+        this.minSliderX = x;
+        this.maxSliderX = x + width;
         loadImages();
     }
 
@@ -41,6 +43,16 @@ public class VolumeButton extends PauseButton implements Button {
     public void resetMouseState() {
         mouseOver = false;
         mousePressed = false;
+    }
+
+    public void changeSliderX(int x) {
+        if (x < minSliderX) {
+            sliderButtonX = minSliderX;
+        } else if (x > maxSliderX) {
+            sliderButtonX = maxSliderX;
+        } else {
+            sliderButtonX = x;
+        }
     }
 
     @Override
