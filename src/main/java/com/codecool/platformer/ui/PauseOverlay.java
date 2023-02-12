@@ -17,12 +17,20 @@ public class PauseOverlay {
     private int menuX, menuY, menuWidth, menuHeight;
     private SoundButton musicButton, sfxButton;
     private UrmButton menuButton, replayButton, unpauseButton;
+    private VolumeButton volumeButton;
 
     public PauseOverlay(Playing playing) {
         this.playing = playing;
         loadBackground();
         loadSoundButtons();
         loadUrmButtons();
+        loadVolumeButton();
+    }
+
+    private void loadVolumeButton() {
+        int volX = (int) (309 * GameProperties.SCALE);
+        int volY = (int) (278 * GameProperties.SCALE);
+        volumeButton = new VolumeButton(volX, volY, VOL_SLIDER_WIDTH, VOL_BUTTON_HEIGHT);
     }
 
     private void loadUrmButtons() {
@@ -58,6 +66,7 @@ public class PauseOverlay {
         // sound buttons
         musicButton.update();
         sfxButton.update();
+        volumeButton.update();
 
         // urm buttons
         menuButton.update();
@@ -72,6 +81,7 @@ public class PauseOverlay {
         // sound buttons
         musicButton.draw(g);
         sfxButton.draw(g);
+        volumeButton.draw(g);
 
         // urm buttons
         menuButton.draw(g);
