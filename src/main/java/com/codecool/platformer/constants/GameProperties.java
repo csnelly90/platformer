@@ -23,5 +23,18 @@ public final class GameProperties {
             public static final int MB_WIDTH = (int) (MB_DEFAULT_WIDTH * SCALE);
             public static final int MB_HEIGHT  = (int) (MB_DEFAULT_HEIGHT * SCALE);
         }
+
+        public static class PauseButtons {
+            public static final int SOUND_BUTTON_DEFAULT_SIZE = 42;
+            public static final int SOUND_BUTTON_SIZE = (int) (SOUND_BUTTON_DEFAULT_SIZE * SCALE);
+            public static final int URM_BUTTON_DEFAULT_SIZE = 56;
+            public static final int URM_BUTTON_SIZE = (int) (URM_BUTTON_DEFAULT_SIZE * SCALE);
+            public static final int VOL_BUTTON_DEFAULT_WIDTH = 28;
+            public static final int VOL_BUTTON_DEFAULT_HEIGHT = 44;
+            public static final int VOL_SLIDER_DEFAULT_WIDTH = 215;
+            public static final int VOL_BUTTON_WIDTH = (int) (VOL_BUTTON_DEFAULT_WIDTH * SCALE);
+            public static final int VOL_BUTTON_HEIGHT = (int) (VOL_BUTTON_DEFAULT_HEIGHT * SCALE);
+            public static final int VOL_SLIDER_WIDTH = (int) (VOL_SLIDER_DEFAULT_WIDTH * SCALE);
+        }
     }
 }
