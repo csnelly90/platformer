@@ -125,11 +125,20 @@ public class PauseOverlay {
     public void mouseMoved(MouseEvent e) {
         musicButton.setMouseOver(false);
         sfxButton.setMouseOver(false);
+        menuButton.setMouseOver(false);
+        replayButton.setMouseOver(false);
+        unpauseButton.setMouseOver(false);
 
         if (isInsideButton(e, musicButton)) {
             musicButton.setMouseOver(true);
         } else if (isInsideButton(e, sfxButton)) {
             sfxButton.setMouseOver(true);
+        } else if (isInsideButton(e, menuButton)) {
+            menuButton.setMouseOver(true);
+        } else if (isInsideButton(e, replayButton)) {
+            replayButton.setMouseOver(true);
+        } else if (isInsideButton(e, unpauseButton)) {
+            unpauseButton.setMouseOver(true);
         }
     }
 }
