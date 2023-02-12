@@ -32,16 +32,19 @@ public class Playing extends State implements StateMethods {
 
     @Override
     public void update() {
-        levelManager.update();
-        player.update();
-        pauseOverlay.update();
+        if (!paused) {
+            levelManager.update();
+            player.update();
+        } else {
+            pauseOverlay.update();
+        }
     }
 
     @Override
     public void draw(Graphics g) {
         levelManager.draw(g);
         player.render(g);
-        pauseOverlay.draw(g);
+        if (paused) pauseOverlay.draw(g);
     }
 
     public void unpauseGame() {
