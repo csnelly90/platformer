@@ -15,11 +15,12 @@ public class VolumeButton extends PauseButton implements Button {
 
     public VolumeButton(int x, int y, int width, int height) {
         super(x + width / 2, y, VOL_BUTTON_WIDTH, height);
+        hitbox.x -= VOL_BUTTON_WIDTH / 2;
         sliderButtonX = x + width / 2;
         this.x = x;
         this.width = width;
-        this.minSliderX = x;
-        this.maxSliderX = x + width;
+        this.minSliderX = x + VOL_BUTTON_WIDTH / 2;
+        this.maxSliderX = x + width - VOL_BUTTON_WIDTH / 2;
         loadImages();
     }
 
@@ -53,12 +54,14 @@ public class VolumeButton extends PauseButton implements Button {
         } else {
             sliderButtonX = x;
         }
+
+        hitbox.x = sliderButtonX - VOL_BUTTON_WIDTH / 2;
     }
 
     @Override
     public void draw(Graphics g) {
         g.drawImage(slider, x, y, width, height, null);
-        g.drawImage(images[imageIndex], sliderButtonX, y, VOL_BUTTON_WIDTH, height, null);
+        g.drawImage(images[imageIndex], sliderButtonX - VOL_BUTTON_WIDTH / 2, y, VOL_BUTTON_WIDTH, height, null);
     }
 
     @Override
