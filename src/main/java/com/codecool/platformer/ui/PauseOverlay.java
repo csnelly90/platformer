@@ -94,7 +94,9 @@ public class PauseOverlay {
     }
 
     public void mouseDragged(MouseEvent e) {
-
+        if (volumeButton.isMousePressed()) {
+            volumeButton.changeSliderX(e.getX());
+        }
     }
 
     public void mousePressed(MouseEvent e) {
@@ -158,5 +160,6 @@ public class PauseOverlay {
             unpauseButton.setMouseOver(true);
         } else if (isInsideButton(e, volumeButton)) {
             volumeButton.setMouseOver(true);
+        }
     }
 }

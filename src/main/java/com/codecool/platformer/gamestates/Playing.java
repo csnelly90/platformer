@@ -1,7 +1,6 @@
 package com.codecool.platformer.gamestates;
 
 import com.codecool.platformer.constants.GameProperties;
-import com.codecool.platformer.constants.Gamestate;
 import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.entities.Player;
 import com.codecool.platformer.levels.LevelManager;
@@ -49,6 +48,12 @@ public class Playing extends State implements StateMethods {
 
     public void unpauseGame() {
         paused = false;
+    }
+
+    public void mouseDragged(MouseEvent e) {
+        if (paused) {
+            pauseOverlay.mouseDragged(e);
+        }
     }
 
     @Override
