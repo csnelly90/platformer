@@ -47,11 +47,11 @@ public class Player extends Entity {
         setAnimation();
     }
 
-    public void render(Graphics g) {
+    public void render(Graphics g, int levelOffset) {
         // enlarge sprite image to triple size
         g.drawImage(
                 animations[playerAction.ROW_INDEX][animationIndex],
-                (int) (hitbox.x - xDrawOffset),
+                (int) (hitbox.x - xDrawOffset) - levelOffset,
                 (int) (hitbox.y - yDrawOffset),
                 width,
                 height,

@@ -68,8 +68,9 @@ public class Playing extends State implements StateMethods {
 
     @Override
     public void draw(Graphics g) {
-        levelManager.draw(g);
-        player.render(g);
+        levelManager.draw(g, xLevelOffset);
+        player.render(g, xLevelOffset);
+
         if (paused) pauseOverlay.draw(g);
     }
 
