@@ -12,7 +12,8 @@ public class LoadSave {
 
     public static final String PLAYER_ATLAS = "/sprites/player_sprites.png";
     public static final String FIRST_LEVEL_ATLAS = "/tiles/rock_grass_terrain.png";
-    public static final String LEVEL_ONE_DATA = "/tiles/level_one_data.png";
+    // public static final String LEVEL_ONE_DATA = "/tiles/level_one_data.png";
+    public static final String LEVEL_ONE_DATA = "/tiles/level_one_data_long.png";
     public static final String MENU_BUTTONS = "/gui/menu_buttons.png";
     public static final String MENU_BACKGROUND = "/gui/menu_background.png";
     public static final String PAUSE_BACKGROUND = "/gui/pause_menu.png";
@@ -40,8 +41,8 @@ public class LoadSave {
     }
 
     public static int[][] getLevelData() {
-        int[][] levelData = new int[GameProperties.TILES_VERTICAL][GameProperties.TILES_HORIZONTAL];
         BufferedImage img = getSpriteAtlas(LEVEL_ONE_DATA);
+        int[][] levelData = new int[img.getHeight()][img.getWidth()];
 
         for (int i = 0; i < img.getHeight(); i++) {
             for (int j = 0; j < img.getWidth(); j++) {
