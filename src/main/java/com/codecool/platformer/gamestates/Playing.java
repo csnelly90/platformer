@@ -1,11 +1,13 @@
 package com.codecool.platformer.gamestates;
 
 import com.codecool.platformer.constants.GameProperties;
+import com.codecool.platformer.constants.Gamestate;
 import com.codecool.platformer.constants.SpriteSize;
 import com.codecool.platformer.entities.Player;
 import com.codecool.platformer.levels.LevelManager;
 import com.codecool.platformer.main.Game;
 import com.codecool.platformer.ui.PauseOverlay;
+import com.codecool.platformer.utils.LoadSave;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,6 +18,12 @@ public class Playing extends State implements StateMethods {
     private LevelManager levelManager;
     private PauseOverlay pauseOverlay;
     private boolean paused = false;
+    private int xLevelOffset;
+    private int leftBorder = (int) (0.2 * GameProperties.WINDOW_WIDTH);
+    private int rightBorder = (int) (0.8 * GameProperties.WINDOW_WIDTH);
+    private int levelTileCountHorizontal = LoadSave.getLevelData()[0].length;
+    private int maxTilesOffset = levelTileCountHorizontal - GameProperties.TILES_HORIZONTAL;
+    private int maxLevelOffsetX = maxTilesOffset * GameProperties.TILE_SIZE;
 
     public Playing(Game game) {
         super(game);
