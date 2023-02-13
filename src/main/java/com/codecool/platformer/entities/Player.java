@@ -47,11 +47,11 @@ public class Player extends Entity {
         setAnimation();
     }
 
-    public void render(Graphics g) {
+    public void render(Graphics g, int levelOffset) {
         // enlarge sprite image to triple size
         g.drawImage(
                 animations[playerAction.ROW_INDEX][animationIndex],
-                (int) (hitbox.x - xDrawOffset),
+                (int) (hitbox.x - xDrawOffset) - levelOffset,
                 (int) (hitbox.y - yDrawOffset),
                 width,
                 height,
@@ -85,7 +85,10 @@ public class Player extends Entity {
             jump();
         }
 
-        if (!left && !right && !inAir) return;
+        // prevents running animation when neither or both A and D buttons are pressed
+        if (!inAir) {
+            if ((!left && !right) || (right && left)) return;
+        }
 
         // temporary storage of x
         float xSpeed = 0;
