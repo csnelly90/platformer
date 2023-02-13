@@ -85,7 +85,10 @@ public class Player extends Entity {
             jump();
         }
 
-        if (!left && !right && !inAir) return;
+        // prevents running animation when neither or both A and D buttons are pressed
+        if (!inAir) {
+            if ((!left && !right) || (right && left)) return;
+        }
 
         // temporary storage of x
         float xSpeed = 0;
